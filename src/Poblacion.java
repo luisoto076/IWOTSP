@@ -13,11 +13,27 @@ public class Poblacion{
 	}
 
 	public double peorFitness(){
-		return 0.0;
+	    ArrayList<Hierba> poblado = this.getPop();
+	    double peor = poblado.get(0).getFitness();
+	    double fitHierba = 0.0;
+	    for(Hierba h: poblado){
+		fitHierba = h.getFitness();
+		if(fitHierba < peor)
+		    peor = fitHierba;
+	    }
+	    return peor;
 	}
 	
 	public double mejorFitness(){
-		return 0.0;
+	    ArrayList<Hierba> poblado = this.getPop();
+	    double mejor = poblado.get(0).getFitness();
+	    double fitHierba = 0.0;
+	    for(Hierba h: poblado){
+		fitHierba = h.getFitness();
+		if(fitHierba > mejor)
+		    mejor = fitHierba;
+	    }
+	    return mejor;
 	}
 
 }
