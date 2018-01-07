@@ -30,15 +30,5 @@ public class Hierba{
 	return 0;
     }
     
-    public ArrayList<Integer> obtenCiudades(){
-	ArrayList<Integer> ciudades = new ArrayList<>();
-	int ciudad = 0;
-	int[] hierba = this.getHierva();
-	for(int i=0; i < hierba.length; i++){
-	    ciudad = hierba[i];
-	    ciudades.add(ciudad);
-	}
-	return ciudades;
-    }
 
 }
