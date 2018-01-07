@@ -1,7 +1,7 @@
 public class Evaluacion{
 
-	public double evalua(int tam, int[] base){
-	
+	public static double evalua(int[] base){
+		return 0.0;
 	}
 
 }
