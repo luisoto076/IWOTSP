@@ -2,20 +2,20 @@ import java.util.ArrayList;
 
 public class Hierba{
 
-    private int[] hierva;
+    private int[] hierba;
     private double fitness;
 	
     public double getFitness(){
 	return fitness;
     }
 
-    public int[] getHierva(){
-	return this.hierva;
+    public int[] getHierba(){
+	return this.hierba;
     }
 	
-    public Hierba(int[] hierva){
-	this.hierva = hierva;
-	this.fitness = Evaluacion.evalua(this.hierva); 
+    public Hierba(int[] hierba){
+	this.hierba = hierba;
+	this.fitness = Evaluacion.evalua(this.hierba); 
     }
     
     public int compareTo(Object o){
@@ -24,10 +24,14 @@ public class Hierba{
 	Hierba h = (Hierba)o;
 	double d = this.fitness - h.fitness;
 	if( d < 0)
-	    return -1;
-	if(d  > 0)
 	    return 1;
+	if(d  > 0)
+	    return -1;
 	return 0;
+    }
+    
+    public String toString(){
+    	return ""+ fitness;
     }
     
 

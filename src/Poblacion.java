@@ -1,39 +1,36 @@
 import java.util.ArrayList;
 
-public class Poblacion{
-
-	private ArrayList<Hierba> poblacion;
-	
-	public ArrayList<Hierba> getPop(){
-		return poblacion;
-	}
+public class Poblacion extends ArrayList<Hierba>{
 	
 	public Poblacion(){
-		this.poblacion = poblacion;
+		super();
 	}
 
 	public double peorFitness(){
-	    ArrayList<Hierba> poblado = this.getPop();
-	    double peor = poblado.get(0).getFitness();
+	    double peor = this.get(0).getFitness();
 	    double fitHierba = 0.0;
-	    for(Hierba h: poblado){
-		fitHierba = h.getFitness();
-		if(fitHierba < peor)
-		    peor = fitHierba;
+	    for(Hierba h: this){
+			fitHierba = h.getFitness();
+			if(fitHierba < peor)
+		    	peor = fitHierba;
 	    }
 	    return peor;
 	}
 	
 	public double mejorFitness(){
-	    ArrayList<Hierba> poblado = this.getPop();
-	    double mejor = poblado.get(0).getFitness();
+	    double mejor = this.get(0).getFitness();
 	    double fitHierba = 0.0;
-	    for(Hierba h: poblado){
+	    for(Hierba h: this){
 		fitHierba = h.getFitness();
 		if(fitHierba > mejor)
 		    mejor = fitHierba;
 	    }
 	    return mejor;
+	}
+	
+	public void competir(int maxPop){
+		this.sort((a, b) -> a.compareTo(b));
+		this.removeRange(maxPop,this.size());
 	}
 
 }

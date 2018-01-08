@@ -14,12 +14,17 @@ public class Main{
 
     public static void main(String[] args) throws IOException{
     	String instancia = "ulysses16";
-    	double tasaCruzamiento = 0.9;
-    	double tasaMutacion = 0.9;
-    	int semilla = 0;
-    	int totalSeleccion = 2;
-    	int maxIteracion = 2000;
-    	int popSize = 200;
+		int semilla = 3;
+		double wini = 0.5;
+		double wfin = 0.001;
+		int n = 10;
+		int indiceMod = 3;
+		int iterMax = 100;
+		int maxPop = 1000;
+		int maxReproducion = 20;
+		CreaSolucionAleatoria csa = new CreaSolucionAleatoria(wini,semilla);
+    	Reproduccion rep = new Reproduccion(maxReproducion,csa);
+		int[] inicial = csa.creaSolucionInicial(16,semilla);
 		TSPInstance problem = new TSPInstance(new File(String.format("data/tsp/%s.tsp",instancia)));
 		System.out.println(problem.getName());
 		System.out.println(problem.getDimension());
@@ -36,16 +41,11 @@ public class Main{
 			}
 		}catch(Exception e){
 		}
-		Random random = new Random(semilla);
-		for(int i = 0; i<10;i++){
-			int[] q = new int[16];
-			//System.out.println(Tour.createTour(p).distance(problem));
-			for(int j = 0; j < 16;j++){
-				q[j] = (int)Math.round(random.nextGaussian() * 0.5 + p[j]);
-			}
-			System.out.println(Tour.createTour(q));
-			System.out.print("\n");
+		Iwo iwo = new Iwo(csa,rep,wini,wfin,n,indiceMod,iterMax,maxPop,inicial);
+		Poblacion res = iwo.algoritmo();
+		for(Hierba h:res){
+			Tour t = Tour.createTour(h.getHierba());
+			System.out.println(t.distance(problem));
 		}
-		
 	}
 }
