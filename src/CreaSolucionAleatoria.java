@@ -6,8 +6,7 @@ public class CreaSolucionAleatoria{
 	private double desvEst;
 	private Random random;
 	
-	public int[] creaSolucionInicial(int tamanio, int semilla){
-		Random r = new Random(semilla);
+	public int[] creaSolucionInicial(int tamanio, Random r){
 		int[] sol = new int[tamanio];
 		for(int i = 1; i<tamanio+1;i++){
 			sol[i-1] = i;
@@ -33,19 +32,24 @@ public class CreaSolucionAleatoria{
 	public void setDesvEst(double desvEst){
 		this.desvEst = desvEst;
 	}
+	
+	public double getDesvEst(){
+		return this.desvEst;
+	}
 
 	public Hierba creaSolucioAleatoria(int[] base){
 		int[] q = new int[base.length];
 		for(int i = 0; i < base.length;i++){
-			q[i] = (int)Math.round(random.nextGaussian() * this.desvEst + base[i]);
+			q[i] = Math.abs(((int)Math.round(random.nextGaussian() * this.desvEst + base[i])) % base.length)+1;
 		}
 		return new Hierba(q);
 	}
 	
-	public Poblacion creaPoblacionInicial(int tam, int[] base){
+	public Poblacion creaPoblacionInicial(int tamP, int tamS , int semilla){
+		Random r = new Random(semilla);
 		Poblacion pop = new Poblacion();
-		for(int i = 0; i < tam; i++){
-			pop.add(creaSolucioAleatoria(base));
+		for(int i = 0; i < tamP; i++){
+			pop.add(new Hierba(creaSolucionInicial(tamS,r)));
 		}
 		return pop;
 	}

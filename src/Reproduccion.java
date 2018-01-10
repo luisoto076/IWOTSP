@@ -12,7 +12,7 @@ public class Reproduccion{
 	
 	public Poblacion reproduceUno(int total, Hierba hierba){
 		Poblacion semillas = new Poblacion();
-		for(int i = 0; i< hierba.getHierba().length;i++){
+		for(int i = 0; i<total;i++){
 			semillas.add(csa.creaSolucioAleatoria(hierba.getHierba()));
 		}
 		return semillas;
