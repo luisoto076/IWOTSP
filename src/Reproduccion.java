@@ -24,8 +24,8 @@ public class Reproduccion{
 	
 	public Poblacion reproduceTodos(Poblacion pop){
 		Poblacion seedpop = new Poblacion();
-		for(Hierba h : pop){
-			seedpop.addAll(reproduceUno(calculaRepNum(pop,h),h));
+		for(Hierba h : pop.values()){
+			seedpop.putAll(reproduceUno(calculaRepNum(pop,h),h));
 		}
 		return seedpop;
 	}

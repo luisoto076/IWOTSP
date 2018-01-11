@@ -14,15 +14,15 @@ import java.util.Hashtable;
 public class Main{
 
     public static void main(String[] args) throws IOException{
-    	String instancia = "ulysses16";
+    	String instancia = args[3];
 		int semilla = Integer.parseInt(args[0]);
 		double wini = Double.parseDouble(args[1]);
 		double wfin = 0.001;
-		int n = 10;
-		int indiceMod = 3;
+		int n = 5;
+		int indiceMod = 2;
 		int iterMax = Integer.parseInt(args[2]) ;
-		int maxPop = 500;
-		int maxReproducion = 40;
+		int maxPop = 200;
+		int maxReproducion = 50;
 		CreaSolucionAleatoria csa = new CreaSolucionAleatoria(wini,semilla);
     	Reproduccion rep = new Reproduccion(maxReproducion,csa);
 		TSPInstance problem = new TSPInstance(new File(String.format("data/tsp/%s.tsp",instancia)));
@@ -42,19 +42,13 @@ public class Main{
 			}
 		}catch(Exception e){
 		}
-		Hashtable<String,Integer[]> pop = new Hashtable<>();
-		Integer[] y = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
-		Integer[] z = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
-		//Hierba t1 = new Hierba(y);
-		//Hierba t2 = new Hierba(z);
-		pop.put("Hola",y);
-		pop.put("Hola",z);
-		System.out.println(pop);
-		Iwo iwo = new Iwo(csa,rep,wini,wfin,n,indiceMod,iterMax,maxPop,semilla,16);
+		Iwo iwo = new Iwo(csa,rep,wini,wfin,n,indiceMod,iterMax,maxPop,semilla,problem.getDimension());
 		Poblacion res = iwo.algoritmo();
-		for(Hierba h:res){
+		@SuppressWarnings("unchecked") ArrayList<Hierba> l = new ArrayList(res.values());
+		l.sort((a, b) -> a.compareTo(b)); 
+		for(Hierba h : l){
 			Tour t = Tour.createTour(h.getHierba());
-			System.out.println(t+" "+t.distance(problem));
+			System.out.println(t+" "+(100*(t.distance(problem)-min)/ min));
 		}
 	}
 }

@@ -33,7 +33,7 @@ public class Iwo{
 		while(iter < iterMax){
 			System.out.println("iteracion: "+ (iter+1)+" de: "+csa.getDesvEst());
 			Poblacion semillas = rep.reproduceTodos(pop);
-			pop.addAll(semillas);
+			pop.putAll(semillas);
 			if(pop.size() > maxPop){
 				pop.competir(maxPop);
 			}
